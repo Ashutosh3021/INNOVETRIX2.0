@@ -1,0 +1,175 @@
+{
+  "user": {
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "password": "securepassword123",
+    "skills": [
+      "Python",
+      "FastAPI",
+      "MongoDB",
+      "Machine Learning",
+      "Docker",
+      "Git"
+    ],
+    "projects": [
+      "Built a REST API using FastAPI and MongoDB",
+      "Developed a machine learning model for sentiment analysis",
+      "Created a containerized microservices application"
+    ]
+  },
+  "internships": [
+    {
+      "title": "Backend Developer Intern",
+      "company": "TechCorp Solutions",
+      "domain": "Software Development",
+      "required_skills": [
+        "Python",
+        "FastAPI",
+        "MongoDB",
+        "REST APIs",
+        "Git"
+      ],
+      "description": "We are looking for a passionate backend developer intern to join our team. You will work on building scalable REST APIs using FastAPI and MongoDB. Experience with containerization (Docker) is a plus. This is a great opportunity to learn from experienced developers and contribute to real-world projects.",
+      "location": "Remote",
+      "duration": "3 months",
+      "stipend": "$500/month"
+    },
+    {
+      "title": "Data Science Intern",
+      "company": "AI Innovations Lab",
+      "domain": "Data Science & AI",
+      "required_skills": [
+        "Python",
+        "Machine Learning",
+        "Pandas",
+        "NumPy",
+        "scikit-learn",
+        "TensorFlow"
+      ],
+      "description": "Join our data science team to work on cutting-edge machine learning projects. You will be involved in data preprocessing, model development, and deployment. Strong programming skills in Python and knowledge of ML libraries are required. Previous project experience in ML is highly valued.",
+      "location": "Hybrid - San Francisco, CA",
+      "duration": "6 months",
+      "stipend": "$800/month"
+    }
+  ],
+  "api_usage_examples": {
+    "1_register": {
+      "method": "POST",
+      "endpoint": "/api/auth/register",
+      "body": {
+        "name": "Alice Johnson",
+        "email": "alice.johnson@example.com",
+        "password": "securepassword123",
+        "skills": ["Python", "FastAPI", "MongoDB", "Machine Learning", "Docker", "Git"],
+        "projects": [
+          "Built a REST API using FastAPI and MongoDB",
+          "Developed a machine learning model for sentiment analysis"
+        ]
+      },
+      "response": {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+        "token_type": "bearer",
+        "user": {
+          "_id": "507f1f77bcf86cd799439011",
+          "name": "Alice Johnson",
+          "email": "alice.johnson@example.com",
+          "skills": ["Python", "FastAPI", "MongoDB", "Machine Learning", "Docker", "Git"],
+          "created_at": "2024-01-15T10:30:00"
+        }
+      }
+    },
+    "2_login": {
+      "method": "POST",
+      "endpoint": "/api/auth/login",
+      "body": {
+        "email": "alice.johnson@example.com",
+        "password": "securepassword123"
+      }
+    },
+    "3_create_internship": {
+      "method": "POST",
+      "endpoint": "/api/internships/",
+      "headers": {
+        "Authorization": "Bearer <your_access_token>"
+      },
+      "body": {
+        "title": "Backend Developer Intern",
+        "company": "TechCorp Solutions",
+        "domain": "Software Development",
+        "required_skills": ["Python", "FastAPI", "MongoDB", "REST APIs", "Git"],
+        "description": "We are looking for a passionate backend developer intern...",
+        "location": "Remote",
+        "duration": "3 months",
+        "stipend": "$500/month"
+      }
+    },
+    "4_get_all_internships": {
+      "method": "GET",
+      "endpoint": "/api/internships/?skip=0&limit=10",
+      "headers": {
+        "Authorization": "Bearer <your_access_token>"
+      }
+    },
+    "5_match_internships": {
+      "method": "GET",
+      "endpoint": "/api/match/{user_id}?top_n=10&min_score=0.0",
+      "headers": {
+        "Authorization": "Bearer <your_access_token>"
+      },
+      "response_example": [
+        {
+          "_id": "507f1f77bcf86cd799439012",
+          "title": "Backend Developer Intern",
+          "company": "TechCorp Solutions",
+          "domain": "Software Development",
+          "required_skills": ["Python", "FastAPI", "MongoDB", "REST APIs", "Git"],
+          "description": "We are looking for a passionate backend developer intern...",
+          "location": "Remote",
+          "duration": "3 months",
+          "stipend": "$500/month",
+          "created_at": "2024-01-15T10:30:00",
+          "match_score": 0.8756,
+          "matched_skills": ["Python", "FastAPI", "MongoDB", "Git"]
+        },
+        {
+          "_id": "507f1f77bcf86cd799439013",
+          "title": "Data Science Intern",
+          "company": "AI Innovations Lab",
+          "domain": "Data Science & AI",
+          "required_skills": ["Python", "Machine Learning", "Pandas", "NumPy", "scikit-learn"],
+          "description": "Join our data science team...",
+          "location": "Hybrid - San Francisco, CA",
+          "duration": "6 months",
+          "stipend": "$800/month",
+          "created_at": "2024-01-15T11:00:00",
+          "match_score": 0.6543,
+          "matched_skills": ["Python", "Machine Learning"]
+        }
+      ]
+    },
+    "6_get_my_recommendations": {
+      "method": "GET",
+      "endpoint": "/api/match/me/recommendations?top_n=5&min_score=0.5",
+      "headers": {
+        "Authorization": "Bearer <your_access_token>"
+      },
+      "description": "Get personalized internship recommendations for the authenticated user"
+    },
+    "7_update_profile": {
+      "method": "PUT",
+      "endpoint": "/api/users/me",
+      "headers": {
+        "Authorization": "Bearer <your_access_token>"
+      },
+      "body": {
+        "skills": ["Python", "FastAPI", "MongoDB", "Machine Learning", "Docker", "Git", "Kubernetes"],
+        "projects": [
+          "Built a REST API using FastAPI and MongoDB",
+          "Developed a machine learning model for sentiment analysis",
+          "Created a containerized microservices application",
+          "Implemented CI/CD pipeline with GitHub Actions"
+        ]
+      }
+    }
+  }
+}
