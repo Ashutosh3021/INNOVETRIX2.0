@@ -4,21 +4,28 @@ FastAPI application entry point for SkillMatchAI
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from fastapi.responses import JSONResponse
 from app.config import settings
 from app.database.db import connect_to_mongo, close_mongo_connection
 from app.routes import auth, users, internships, matching
 
 
 @asynccontextmanager
-async def lifespan(fastapi_app: FastAPI):
+async def lifespan(app: FastAPI):
     """
     Application lifespan context manager
     Handles startup and shutdown events
     """
     # Startup: Connect to MongoDB
+    print("=" * 60)
+    print(f"🚀 Starting {settings.APP_NAME} v{settings.APP_VERSION}")
+    print("=" * 60)
+    
     await connect_to_mongo()
-    print(f"🚀 {settings.APP_NAME} v{settings.APP_VERSION} started successfully!")
+    
+    print(f"✅ {settings.APP_NAME} started successfully!")
+    print(f"📚 API Documentation: http://localhost:8000/docs")
+    print(f"📖 ReDoc: http://localhost:8000/redoc")
+    print("=" * 60)
     
     yield
     
@@ -52,10 +59,10 @@ app = FastAPI(
     redoc_url="/redoc",  # ReDoc UI
 )
 
-# Configure CORS
+# Configure CORS - use the property that converts string to list
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origins=settings.cors_origins,  # Use the property method
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -82,24 +89,16 @@ async def root():
 
 @app.get("/health", tags=["Root"])
 async def health_check():
-    """Health check endpoint. Returns 503 if database isn't ready."""
-    # Import here to avoid circular imports at module load
+    """Health check endpoint"""
     from app.database.db import is_db_ready
-
-    healthy = is_db_ready()
-    if not healthy:
-        content = {
-            "status": "unhealthy",
-            "detail": "database unavailable",
-            "app": settings.APP_NAME,
-            "version": settings.APP_VERSION,
-        }
-        return JSONResponse(content=content, status_code=503)
-
+    
+    db_status = "connected" if is_db_ready() else "disconnected"
+    
     return {
-        "status": "healthy",
+        "status": "healthy" if is_db_ready() else "degraded",
         "app": settings.APP_NAME,
         "version": settings.APP_VERSION,
+        "database": db_status
     }
 
 
