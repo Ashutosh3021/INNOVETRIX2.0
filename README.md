@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎯 SkillMatchAI
 
 <div align="center">
@@ -65,10 +66,40 @@ This project was built through an epic journey of:
 - Try API endpoints directly in browser
 
 ---
+=======
+# SkillMatchAI - Intelligent Internship Matching Platform
+
+🎓 An AI-powered internship matching platform that connects students with their ideal opportunities using TF-IDF algorithm and cosine similarity.
+
+**Version**: 1.0 | **Status**: Production Ready ✅ | **Tech**: FastAPI + MongoDB + Vanilla JS
+
+## 🌟 Features
+
+### For Students
+- **AI-Powered Matching**: Get personalized internship recommendations based on your skills
+- **Profile Management**: Maintain your academic profile with branch, semester, and CGPA
+- **Smart Applications**: Apply to internships and track your application status
+- **Browse & Search**: Explore all available internships with advanced filters
+
+### For Companies
+- **Post Internships**: Create and manage internship opportunities
+- **Skill-Based Targeting**: Attract candidates with specific skill sets
+- **Application Management**: Review and manage incoming applications
+- **Analytics Dashboard**: Track application metrics and performance
+
+### For Admins/Schools
+- **Comprehensive Analytics**: View system-wide statistics and insights
+- **Student Management**: Monitor student profiles, block/unblock accounts
+- **Branch Analytics**: Track students by branch with performance metrics (CGPA)
+- **Internship Oversight**: Delete inappropriate internships
+- **Top Performers**: View leaderboard of top students by CGPA
+- **Application Insights**: Monitor internship application trends
+>>>>>>> a09f447 (modifications and finaltouch on 22/10/2025)
 
 ## 🚀 Quick Start
 
 ### Prerequisites
+<<<<<<< HEAD
 
 - Python 3.11.9 or higher
 - MongoDB 7.0 or higher
@@ -265,10 +296,86 @@ curl -X GET "http://localhost:8000/api/match/me/recommendations" \
 - 🤔 **0.0 - 0.4**: Poor match
 
 ---
+=======
+- Python 3.8+
+- MongoDB (running locally or remote connection)
+- Modern web browser
+
+### Installation
+
+1. **Clone or download the project**
+```bash
+cd BPUT
+```
+
+2. **Create virtual environment**
+```bash
+python -m venv .venv
+```
+
+3. **Activate virtual environment**
+- Windows:
+  ```bash
+  .venv\Scripts\activate
+  ```
+- Linux/Mac:
+  ```bash
+  source .venv/bin/activate
+  ```
+
+4. **Install dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+5. **Configure environment variables**
+Create a `.env` file in the root directory:
+```env
+MONGODB_URI=mongodb://localhost:27017
+DATABASE_NAME=skillmatchai_db
+SECRET_KEY=your-secret-key-here
+DEBUG=True
+```
+
+6. **Start the server**
+```bash
+python run.py
+```
+
+The server will start at: `http://localhost:8000`
+
+### Access the Application
+
+- **Frontend**: Open `frontend/index.html` in your browser
+- **API Documentation**: Visit `http://localhost:8000/docs`
+- **ReDoc**: Visit `http://localhost:8000/redoc`
+
+## 👥 User Roles
+
+### 1. Student
+- Register with skills and academic details (branch, semester, CGPA)
+- Receive AI-powered internship recommendations
+- Apply to internships
+- Track application status
+
+### 2. Company
+- Post internship opportunities
+- Manage posted internships
+- View applications
+
+### 3. Admin/School
+- Access comprehensive analytics dashboard
+- View students by branch with average CGPA
+- Monitor top performing students
+- Block/unblock student accounts
+- Delete any internship posting
+- View application statistics
+>>>>>>> a09f447 (modifications and finaltouch on 22/10/2025)
 
 ## 🏗️ Project Structure
 
 ```
+<<<<<<< HEAD
 SkillMatchAI/
 │
 ├── 📁 app/
@@ -524,3 +631,346 @@ Have questions? Need help?
 *"Matching dreams with opportunities, one algorithm at a time."* ✨
 
 </div>
+=======
+BPUT/
+├── app/
+│   ├── models/           # Pydantic models
+│   │   ├── user.py
+│   │   ├── internship.py
+│   │   └── application.py
+│   ├── routes/           # API endpoints
+│   │   ├── auth.py
+│   │   ├── users.py
+│   │   ├── internships.py
+│   │   ├── applications.py
+│   │   ├── matching.py
+│   │   └── admin.py      # New: Admin endpoints
+│   ├── services/         # Business logic
+│   │   ├── auth_service.py
+│   │   ├── user_service.py
+│   │   ├── internship_service.py
+│   │   ├── application_service.py
+│   │   ├── matching_service.py
+│   │   └── admin_service.py  # New: Admin operations
+│   ├── database/         # Database connection
+│   │   └── db.py
+│   ├── config.py         # Configuration
+│   └── main.py          # FastAPI app
+├── frontend/            # Frontend files
+│   ├── index.html       # Main UI with all dashboards
+│   ├── app.js          # JavaScript logic
+│   ├── styles.css      # Styling
+│   └── theme.css       # Theme variables
+├── requirements.txt    # Python dependencies
+├── run.py             # Server startup script
+└── README.md          # This file
+```
+
+## 🔧 API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+
+### Users
+- `GET /api/users/me` - Get current user profile
+- `PUT /api/users/me` - Update user profile
+- `DELETE /api/users/me` - Delete user account
+
+### Internships
+- `POST /api/internships/` - Create internship
+- `GET /api/internships/` - Get all internships
+- `GET /api/internships/{id}` - Get specific internship
+- `PUT /api/internships/{id}` - Update internship
+- `DELETE /api/internships/{id}` - Delete internship
+
+### Applications
+- `POST /api/applications/` - Create application
+- `GET /api/applications/me` - Get my applications
+- `DELETE /api/applications/{id}` - Withdraw application
+
+### Matching
+- `GET /api/match/me/recommendations` - Get personalized recommendations
+- `POST /api/match/calculate` - Calculate match for specific internship
+
+### Admin (New - Phase 4 & 5)
+- `GET /api/admin/analytics/overview` - System overview statistics
+- `GET /api/admin/analytics/students-by-branch` - Students grouped by branch
+- `GET /api/admin/analytics/students-by-semester` - Students by semester
+- `GET /api/admin/analytics/top-students` - Top performers by CGPA
+- `GET /api/admin/analytics/internships` - Internship analytics by domain
+- `GET /api/admin/analytics/applications` - Application analytics
+- `GET /api/admin/analytics/placement` - **NEW**: Placement tracking analytics
+- `GET /api/admin/analytics/company-hiring` - **NEW**: Company hiring statistics
+- `GET /api/admin/students/unplaced` - **NEW**: Unplaced students list
+- `GET /api/admin/students` - Get all students (with filters)
+- `GET /api/admin/internships` - Get all internships with stats
+- `POST /api/admin/students/{id}/block` - Block student
+- `POST /api/admin/students/{id}/unblock` - Unblock student
+- `DELETE /api/admin/internships/{id}` - Delete any internship
+
+## 🎨 User Interface
+
+### Landing Page
+- Modern, responsive design
+- Role selection (Student, Company, Admin/School)
+- Feature highlights
+- How it works section
+
+### Student Dashboard
+- Personalized recommendations with match scores
+- Application tracking
+- Profile management with academic details
+- Browse all internships
+
+### Company Dashboard
+- Create internship postings
+- Manage existing postings
+- View applications (coming soon)
+
+### Admin Dashboard
+- **Analytics Section**:
+  - Overview cards (students, companies, internships, applications)
+  - **NEW**: Placement tracking charts (placed/searching/not placed)
+  - **NEW**: Placement type distribution (internship/job/both)
+  - **NEW**: Salary statistics by placement type
+  - **NEW**: Company hiring statistics with sorting
+  - Students by branch with average CGPA
+  - Top performing students leaderboard
+- **Interactive Filters** (NEW):
+  - Filter by branch (CSE, ECE, ME, EE, CE)
+  - Filter by semester (1-8)
+  - Filter by placement status
+  - Apply/Reset filter functionality
+- **Students Section**:
+  - View all student profiles
+  - Block/unblock student accounts
+  - See academic performance (branch, semester, CGPA)
+  - **NEW**: View placement status
+- **Internships Section**:
+  - View all internships with application counts
+  - Delete any internship posting
+- **Unplaced Students** (NEW):
+  - List of students without placements
+  - Sorted by CGPA
+  - **Export to CSV** functionality
+
+## 🤖 AI Matching Algorithm
+
+The platform uses TF-IDF (Term Frequency-Inverse Document Frequency) with cosine similarity to match students with internships:
+
+1. **Skill Vectorization**: Convert student skills and internship requirements into TF-IDF vectors
+2. **Similarity Calculation**: Compute cosine similarity between vectors
+3. **Score Generation**: Generate match percentage (0-100%)
+4. **Ranking**: Sort recommendations by match score
+
+## 🔐 Security Features
+
+- JWT-based authentication
+- Password hashing with bcrypt
+- Role-based access control
+- Protected admin endpoints
+- Input validation with Pydantic
+- Account blocking capability for admins
+
+## 📊 Database Schema
+
+### Users Collection
+```javascript
+{
+  _id: ObjectId,
+  name: String,
+  email: String,
+  role: String,  // "student", "company", "admin"
+  hashed_password: String,
+  skills: [String],
+  projects: [String],
+  branch: String,       // e.g., "CSE", "ECE", "ME"
+  semester: Number,     // 1-8
+  cgpa: Number,         // 0.0-10.0
+  // NEW: Placement tracking fields
+  placement_status: String,  // "placed", "searching", "not_placed"
+  company_placed: String,    // Company name if placed
+  salary_package: Number,    // Salary in LPA
+  placement_type: String,    // "internship", "job", "both"
+  is_blocked: Boolean,
+  created_at: DateTime,
+  updated_at: DateTime
+}
+```
+
+### Internships Collection
+```javascript
+{
+  _id: ObjectId,
+  title: String,
+  company: String,
+  domain: String,
+  required_skills: [String],
+  description: String,
+  location: String,
+  duration: String,
+  stipend: String,
+  posted_by: String,  // User ID
+  created_at: DateTime,
+  updated_at: DateTime
+}
+```
+
+### Applications Collection
+```javascript
+{
+  _id: ObjectId,
+  student_id: String,
+  internship_id: String,
+  status: String,  // "pending", "accepted", "rejected"
+  applied_at: DateTime
+}
+```
+
+## 🔄 Future Enhancements
+
+- [ ] Email notifications
+- [ ] Resume upload
+- [ ] Interview scheduling
+- [x] ~~Advanced analytics with charts~~ ✅ **COMPLETED (Phase 4)**
+- [x] ~~Export reports (CSV)~~ ✅ **COMPLETED (Phase 4)**
+- [ ] Export reports (PDF/Excel)
+- [ ] Multi-language support
+- [ ] Mobile app
+- [ ] Real-time chat between students and companies
+- [x] ~~Placement tracking~~ ✅ **COMPLETED (Phase 4)**
+- [x] ~~Interactive filters~~ ✅ **COMPLETED (Phase 4)**
+- [x] ~~Company hiring statistics~~ ✅ **COMPLETED (Phase 4)**
+
+## 🐛 Troubleshooting
+
+### Database Connection Issues
+- Ensure MongoDB is running
+- Check MONGODB_URI in .env file
+- Verify network connectivity
+
+### Authentication Errors
+- Clear browser localStorage
+- Check if SECRET_KEY is set in .env
+- Verify token hasn't expired
+
+### Blocked Account
+- Contact admin to unblock your account
+- Admins can unblock from Admin Dashboard > Students
+
+## 📝 License
+
+This project is open source and available for educational purposes.
+
+## 👨‍💻 Developer Notes
+
+### Creating an Admin Account
+
+Admin accounts must be created with the role field:
+
+```python
+# Register via API with role="admin"
+POST /api/auth/register
+{
+  "name": "Admin User",
+  "email": "admin@example.com",
+  "password": "SecurePass123",
+  "role": "admin",
+  "skills": [],
+  "projects": []
+}
+```
+
+Or directly in MongoDB:
+```javascript
+db.users.insertOne({
+  name: "Admin",
+  email: "admin@school.edu",
+  role: "admin",
+  hashed_password: "$2b$12$...",  // Use bcrypt to hash password
+  skills: [],
+  projects: [],
+  is_blocked: false,
+  created_at: new Date(),
+  updated_at: new Date()
+})
+```
+
+### Student Academic Fields
+
+When students register, they can include:
+- `branch`: Department/Branch (CSE, ECE, ME, etc.)
+- `semester`: Current semester (1-8)
+- `cgpa`: Current CGPA (0.0-10.0)
+
+These fields are optional during registration but recommended for better analytics.
+
+## 📧 Support
+
+For issues or questions, please check the API documentation at `/docs` or contact the development team.
+
+---
+
+## 🎉 Phase 4 & 5 Enhancements (Latest)
+
+### What's New in Phase 4 & 5
+
+We've added comprehensive **placement tracking** and **advanced analytics** to the admin dashboard:
+
+#### 📊 Placement Analytics
+- **Placement Overview**: Visual breakdown of placed/searching/not placed students
+- **Placement Rate**: Real-time calculation of overall placement percentage
+- **Placement Type Distribution**: Charts showing internship vs job vs both
+- **Salary Statistics**: Average, min, max salary by placement type
+
+#### 🔍 Interactive Filters
+- **Branch Filter**: Filter students by CSE, ECE, ME, EE, CE
+- **Semester Filter**: Filter by semester (1-8)
+- **Placement Status Filter**: View placed, searching, or not placed students
+- **Multi-criteria**: Combine filters for precise results
+
+#### 🏢 Company Hiring Stats
+- **Hiring Metrics**: Students hired per company
+- **Salary Insights**: Average salary offered by each company
+- **Interactive Sorting**: Click to sort by hire count (ascending/descending)
+- **Visual Tables**: Clean, sortable data presentation
+
+#### 📥 Unplaced Students List
+- **Smart List**: Unplaced students sorted by CGPA
+- **Export to CSV**: One-click download of student data
+- **Comprehensive Data**: Name, email, branch, semester, CGPA, skills
+- **Date-stamped Files**: Automatic filename with current date
+
+#### 🧪 Testing & Validation
+- **Test Script**: `test_phase4_5.py` for creating test data
+- **Validation Suite**: Automated endpoint testing
+- **Sample Data**: Pre-configured students with various placement statuses
+
+### How to Use Phase 4 & 5 Features
+
+1. **Login as Admin**: Use `admin@bput.edu` / `Admin@123`
+2. **View Analytics**: See placement charts and statistics
+3. **Apply Filters**: Select branch, semester, or placement status
+4. **Sort Companies**: Click "Sort by Hired" to toggle order
+5. **Export Data**: Click "Export CSV" on unplaced students list
+
+### Testing Phase 4 & 5
+
+Run the test script to create sample data:
+```bash
+python test_phase4_5.py
+# Choose option 1 to create test data
+# Choose option 2 to validate analytics
+# Choose option 3 for both
+```
+
+### Documentation
+- **Full Details**: See `PHASE_4_5_COMPLETE.md` for comprehensive documentation
+- **Implementation**: All code is production-ready and tested
+- **Performance**: Optimized MongoDB aggregations and client-side filtering
+
+---
+
+**Built with ❤️ using FastAPI, MongoDB, and Vanilla JavaScript**
+>>>>>>> a09f447 (modifications and finaltouch on 22/10/2025)

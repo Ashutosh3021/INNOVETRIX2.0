@@ -17,7 +17,6 @@ class Settings(BaseSettings):
     # MongoDB
     MONGODB_URL: str = "mongodb://127.0.0.1:27017/"
     DATABASE_NAME: str = "skillmatchai_db"
-    MONGO_URI: str  
     
     # JWT Authentication
     SECRET_KEY: str = "your-secret-key-change-this-in-production"

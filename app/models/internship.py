@@ -1,7 +1,7 @@
 """
 Internship data models and schemas using Pydantic
 """
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator, ConfigDict
 from typing import Optional, List
 from datetime import datetime
 
@@ -11,7 +11,7 @@ class InternshipBase(BaseModel):
     title: str = Field(..., min_length=3, max_length=200)
     company: str = Field(..., min_length=2, max_length=100)
     domain: str = Field(..., min_length=2, max_length=100)
-    required_skills: List[str] = Field(..., min_items=1)
+    required_skills: List[str] = Field(default_factory=list)
     description: str = Field(..., min_length=10, max_length=2000)
     location: Optional[str] = Field(None, max_length=100)
     duration: Optional[str] = Field(None, max_length=50)
@@ -20,7 +20,21 @@ class InternshipBase(BaseModel):
 
 class InternshipCreate(InternshipBase):
     """Model for creating a new internship"""
-    pass
+    
+    @field_validator('required_skills')
+    @classmethod
+    def validate_skills(cls, v: List[str]) -> List[str]:
+        """Ensure skills are not empty and clean duplicates"""
+        if not v or len(v) == 0:
+            raise ValueError('At least one required skill must be specified')
+        
+        # Remove empty strings and duplicates
+        cleaned_skills = list(dict.fromkeys([s.strip() for s in v if s.strip()]))
+        
+        if not cleaned_skills:
+            raise ValueError('At least one valid required skill must be specified')
+        
+        return cleaned_skills
 
 
 class InternshipUpdate(BaseModel):
@@ -42,9 +56,9 @@ class InternshipInDB(InternshipBase):
     updated_at: datetime
     posted_by: str  # User ID who posted the internship
     
-    class Config:
-        populate_by_name = True
-        json_schema_extra = {
+    model_config = ConfigDict(
+        populate_by_name=True,
+        json_schema_extra={
             "example": {
                 "_id": "507f1f77bcf86cd799439012",
                 "title": "Backend Developer Intern",
@@ -60,6 +74,7 @@ class InternshipInDB(InternshipBase):
                 "posted_by": "507f1f77bcf86cd799439011"
             }
         }
+    )
 
 
 class InternshipResponse(InternshipBase):
@@ -70,8 +85,7 @@ class InternshipResponse(InternshipBase):
     duration: Optional[str] = None
     stipend: Optional[str] = None
     
-    class Config:
-        populate_by_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class MatchedInternship(InternshipResponse):
@@ -79,9 +93,9 @@ class MatchedInternship(InternshipResponse):
     match_score: float = Field(..., ge=0.0, le=1.0)
     matched_skills: List[str] = Field(default_factory=list)
     
-    class Config:
-        populate_by_name = True
-        json_schema_extra = {
+    model_config = ConfigDict(
+        populate_by_name=True,
+        json_schema_extra={
             "example": {
                 "_id": "507f1f77bcf86cd799439012",
                 "title": "Backend Developer Intern",
@@ -94,3 +108,4 @@ class MatchedInternship(InternshipResponse):
                 "created_at": "2024-01-15T10:30:00"
             }
         }
+    )

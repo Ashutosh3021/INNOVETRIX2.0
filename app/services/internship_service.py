@@ -4,7 +4,9 @@ Internship service for business logic related to internship operations
 from datetime import datetime
 from typing import List, Optional
 from bson import ObjectId
-from app.database.db import get_database
+from bson.errors import InvalidId
+from fastapi import HTTPException, status
+from app.database.db import get_database, is_db_ready
 from app.models.internship import (
     InternshipCreate,
     InternshipUpdate,
@@ -17,7 +19,17 @@ class InternshipService:
     """Service class for internship-related operations"""
     
     def __init__(self):
+        if not is_db_ready():
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="Database connection not ready. Please try again later."
+            )
         self.db = get_database()
+        if self.db is None:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="Database connection not available."
+            )
         self.collection = self.db.internships
     
     async def create_internship(
@@ -58,9 +70,20 @@ class InternshipService:
             
         Returns:
             Internship object if found, None otherwise
+            
+        Raises:
+            HTTPException: If internship_id format is invalid
         """
         try:
-            internship = await self.collection.find_one({"_id": ObjectId(internship_id)})
+            object_id = ObjectId(internship_id)
+        except InvalidId:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=f"Invalid internship ID format: {internship_id}"
+            )
+        
+        try:
+            internship = await self.collection.find_one({"_id": object_id})
             
             if not internship:
                 return None
@@ -68,8 +91,11 @@ class InternshipService:
             internship["_id"] = str(internship["_id"])
             return InternshipInDB(**internship)
             
-        except Exception:
-            return None
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Database error: {str(e)}"
+            )
     
     async def get_all_internships(
         self,
@@ -125,7 +151,19 @@ class InternshipService:
             
         Returns:
             Updated internship object if successful, None otherwise
+            
+        Raises:
+            HTTPException: If internship_id format is invalid or update data is empty
         """
+        # Validate ObjectId format
+        try:
+            object_id = ObjectId(internship_id)
+        except InvalidId:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=f"Invalid internship ID format: {internship_id}"
+            )
+        
         # Check if internship exists and user is the owner
         existing = await self.get_internship_by_id(internship_id)
         if not existing or existing.posted_by != user_id:
@@ -135,17 +173,28 @@ class InternshipService:
         update_dict = internship_data.model_dump(exclude_none=True)
         
         if not update_dict:
-            return existing
+            # No fields to update
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail="No valid fields provided for update. Please provide at least one field to update."
+            )
         
         update_dict["updated_at"] = datetime.utcnow()
         
         # Update in database
-        await self.collection.update_one(
-            {"_id": ObjectId(internship_id)},
-            {"$set": update_dict}
-        )
-        
-        return await self.get_internship_by_id(internship_id)
+        try:
+            await self.collection.update_one(
+                {"_id": object_id},
+                {"$set": update_dict}
+            )
+            
+            return await self.get_internship_by_id(internship_id)
+            
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Database error: {str(e)}"
+            )
     
     async def delete_internship(self, internship_id: str, user_id: str) -> bool:
         """
@@ -157,14 +206,32 @@ class InternshipService:
             
         Returns:
             True if deleted successfully, False otherwise
+            
+        Raises:
+            HTTPException: If internship_id format is invalid
         """
+        # Validate ObjectId format
+        try:
+            object_id = ObjectId(internship_id)
+        except InvalidId:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=f"Invalid internship ID format: {internship_id}"
+            )
+        
         # Check if internship exists and user is the owner
         existing = await self.get_internship_by_id(internship_id)
         if not existing or existing.posted_by != user_id:
             return False
         
-        result = await self.collection.delete_one({"_id": ObjectId(internship_id)})
-        return result.deleted_count > 0
+        try:
+            result = await self.collection.delete_one({"_id": object_id})
+            return result.deleted_count > 0
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Database error: {str(e)}"
+            )
     
     def internship_to_response(self, internship: InternshipInDB) -> InternshipResponse:
         """

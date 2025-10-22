@@ -1,0 +1,175 @@
+<!-- Multi-Step Wizard Form (for Students) -->
+                <div id="wizard-form" class="wizard-container" style="display: none;">
+                    <!-- Progress Steps -->
+                    <div class="wizard-steps">
+                        <div class="wizard-step active">
+                            <div class="wizard-step-circle">1</div>
+                            <div class="wizard-step-label">Basic Info</div>
+                        </div>
+                        <div class="wizard-step">
+                            <div class="wizard-step-circle">2</div>
+                            <div class="wizard-step-label">Academic</div>
+                        </div>
+                        <div class="wizard-step">
+                            <div class="wizard-step-circle">3</div>
+                            <div class="wizard-step-label">Skills</div>
+                        </div>
+                        <div class="wizard-step">
+                            <div class="wizard-step-circle">4</div>
+                            <div class="wizard-step-label">Experience</div>
+                        </div>
+                        <div class="wizard-step">
+                            <div class="wizard-step-circle">5</div>
+                            <div class="wizard-step-label">Final</div>
+                        </div>
+                    </div>
+
+                    <!-- Wizard Content -->
+                    <div class="wizard-content">
+                        <!-- Step 1: Basic Info -->
+                        <div id="wizard-step-1" class="wizard-panel active">
+                            <h3 class="wizard-title">Basic Information</h3>
+                            <p class="wizard-description">Let's start with your basic details</p>
+                            
+                            <div class="wizard-field-group">
+                                <label>Full Name <span class="required">*</span></label>
+                                <input type="text" id="wizard-name" required placeholder="John Doe">
+                            </div>
+                            
+                            <div class="wizard-field-group">
+                                <label>Email Address <span class="required">*</span></label>
+                                <input type="email" id="wizard-email" required placeholder="your@email.com">
+                                <div class="wizard-helper-text">You'll receive your unique username after registration</div>
+                            </div>
+                            
+                            <div class="wizard-field-group">
+                                <label>Password <span class="required">*</span></label>
+                                <input type="password" id="wizard-password" required placeholder="Min 8 chars, 1 letter, 1 number">
+                                <div class="wizard-helper-text">Must be at least 8 characters with 1 letter and 1 number</div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Academic Info -->
+                        <div id="wizard-step-2" class="wizard-panel">
+                            <h3 class="wizard-title">Academic Information</h3>
+                            <p class="wizard-description">Tell us about your academic background</p>
+                            
+                            <div class="wizard-field-group">
+                                <label>Branch <span class="required">*</span></label>
+                                <select id="wizard-branch" required>
+                                    <option value="">Select Your Branch</option>
+                                    <option value="CSE">Computer Science & Engineering</option>
+                                    <option value="ECE">Electronics & Communication</option>
+                                    <option value="ME">Mechanical Engineering</option>
+                                    <option value="CE">Civil Engineering</option>
+                                    <option value="EE">Electrical Engineering</option>
+                                    <option value="IT">Information Technology</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="wizard-field-row">
+                                <div class="wizard-field-group">
+                                    <label>Current Semester <span class="required">*</span></label>
+                                    <input type="number" id="wizard-semester" required min="1" max="8" placeholder="6">
+                                </div>
+                                <div class="wizard-field-group">
+                                    <label>CGPA <span class="required">*</span></label>
+                                    <input type="number" id="wizard-cgpa" required min="0" max="10" step="0.01" placeholder="8.5">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Skills & Certifications -->
+                        <div id="wizard-step-3" class="wizard-panel">
+                            <h3 class="wizard-title">Skills & Certifications</h3>
+                            <p class="wizard-description">Share your technical skills and certifications</p>
+                            
+                            <div class="wizard-field-group">
+                                <label>Skills <span class="required">*</span></label>
+                                <div class="tags-input-container" id="wizard-skills-container">
+                                    <input type="text" id="wizard-skills-input" class="tag-input" placeholder="Type skill and press Enter">
+                                </div>
+                                <div class="wizard-helper-text">Press Enter or comma to add each skill</div>
+                            </div>
+                            
+                            <div class="wizard-field-group">
+                                <label>Certifications</label>
+                                <div class="tags-input-container" id="wizard-certifications-container">
+                                    <input type="text" id="wizard-certifications-input" class="tag-input" placeholder="Type certification and press Enter">
+                                </div>
+                                <div class="wizard-helper-text">E.g., AWS Certified, Google Cloud, Coursera certificates</div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Experience & Projects -->
+                        <div id="wizard-step-4" class="wizard-panel">
+                            <h3 class="wizard-title">Experience & Projects</h3>
+                            <p class="wizard-description">Highlight your work experience and projects</p>
+                            
+                            <div class="wizard-field-group">
+                                <label>Work Experience</label>
+                                <textarea id="wizard-experience" rows="4" placeholder="Describe your internships, part-time jobs, or work experience..."></textarea>
+                                <div class="wizard-helper-text">Include company names, roles, and duration</div>
+                            </div>
+                            
+                            <div class="wizard-field-group">
+                                <label>Projects</label>
+                                <div class="tags-input-container" id="wizard-projects-container">
+                                    <input type="text" id="wizard-projects-input" class="tag-input" placeholder="Type project name and press Enter">
+                                </div>
+                                <div class="wizard-helper-text">List your major academic or personal projects</div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Languages & Resume -->
+                        <div id="wizard-step-5" class="wizard-panel">
+                            <h3 class="wizard-title">Languages & Resume</h3>
+                            <p class="wizard-description">Final step - languages and resume upload</p>
+                            
+                            <div class="wizard-field-group">
+                                <label>Languages Known <span class="required">*</span></label>
+                                <div class="tags-input-container" id="wizard-languages-container">
+                                    <input type="text" id="wizard-languages-input" class="tag-input" placeholder="Type language and press Enter">
+                                </div>
+                                <div class="wizard-helper-text">E.g., English, Hindi, Tamil, etc.</div>
+                            </div>
+                            
+                            <div class="wizard-field-group">
+                                <label>Upload Resume (Optional)</label>
+                                <label for="wizard-resume-upload" class="wizard-file-upload">
+                                    <input type="file" id="wizard-resume-upload" class="wizard-file-input" accept=".pdf,.doc,.docx">
+                                    <div class="wizard-file-icon">📄</div>
+                                    <div class="wizard-file-text">Click to upload or drag and drop</div>
+                                    <div class="wizard-file-text">PDF, DOC, DOCX (Max 5MB)</div>
+                                    <div class="wizard-file-name" id="wizard-resume-name"></div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div class="wizard-navigation">
+                            <button type="button" id="wizard-prev" class="wizard-nav-btn btn-previous" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                                Previous
+                            </button>
+                            <button type="button" id="wizard-next" class="wizard-nav-btn btn-next">
+                                Next
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                            <button type="button" id="wizard-submit" class="wizard-nav-btn btn-submit" style="display: none;">
+                                <span>Create Account</span>
+                                <div class="loading-spinner"></div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p class="form-toggle" style="text-align: center; margin-top: 1rem;">
+                        Already have an account? 
+                        <a href="#" id="show-login-from-wizard">Sign in</a>
+                    </p>
+                </div>

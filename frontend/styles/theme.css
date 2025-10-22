@@ -1,0 +1,176 @@
+/* ============================================
+   DRACULA DARK THEME VARIABLES & CONFIGURATION
+   ============================================ */
+
+:root {
+    /* Dracula Color Palette */
+    --bg-primary: #282a36;
+    --bg-secondary: #44475a;
+    --bg-tertiary: #21222c;
+    --text-primary: #f8f8f2;
+    --text-secondary: #6272a4;
+    --accent-purple: #bd93f9;
+    --accent-pink: #ff79c6;
+    --accent-cyan: #8be9fd;
+    --accent-green: #50fa7b;
+    --accent-orange: #ffb86c;
+    --accent-red: #ff5555;
+    --accent-yellow: #f1fa8c;
+    
+    /* Semantic Colors */
+    --primary: var(--accent-purple);
+    --secondary: var(--accent-pink);
+    --success: var(--accent-green);
+    --warning: var(--accent-yellow);
+    --error: var(--accent-red);
+    --info: var(--accent-cyan);
+    
+    /* UI Elements */
+    --border-color: rgba(98, 114, 164, 0.3);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 20px rgba(189, 147, 249, 0.3);
+    
+    /* Typography */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'Fira Code', 'Courier New', monospace;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* Light Theme */
+.light-theme {
+    --bg-primary: #f8f8f2;
+    --bg-secondary: #e6e6e6;
+    --bg-tertiary: #ffffff;
+    --text-primary: #282a36;
+    --text-secondary: #6272a4;
+    --border-color: rgba(40, 42, 54, 0.15);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    --shadow-glow: 0 0 20px rgba(189, 147, 249, 0.2);
+}
+
+/* ============================================
+   THEME TOGGLE BUTTON
+   ============================================ */
+
+.theme-toggle {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+    border-color: var(--primary);
+}
+
+.theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-primary);
+    transition: all var(--transition-base);
+}
+
+.dark-theme .theme-toggle .sun-icon {
+    display: block;
+}
+
+.dark-theme .theme-toggle .moon-icon {
+    display: none;
+}
+
+.light-theme .theme-toggle .sun-icon {
+    display: none;
+}
+
+.light-theme .theme-toggle .moon-icon {
+    display: block;
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.glow-purple {
+    box-shadow: 0 0 20px var(--accent-purple);
+}
+
+.glow-pink {
+    box-shadow: 0 0 20px var(--accent-pink);
+}
+
+.glow-cyan {
+    box-shadow: 0 0 20px var(--accent-cyan);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.card-hover {
+    transition: all var(--transition-base);
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}

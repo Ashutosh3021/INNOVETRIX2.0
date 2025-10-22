@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillMatchAI - Intelligent Internship Matching</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/theme.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="styles/wizard.css">
+</head>
+<body class="dark-theme">
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </button>
+
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active">
+        <div class="landing-container">
+            <!-- Hero Section -->
+            <div class="hero-section fade-in">
+                <h1 class="hero-title glitch" data-text="SkillMatchAI">SkillMatchAI</h1>
+                <p class="hero-subtitle">Intelligent Internship Matching Platform</p>
+                <div class="hero-description">
+                    <p>Powered by AI • TF-IDF Matching • Real-time Analytics</p>
+                </div>
+            </div>
+
+            <!-- Story-Driven Role Introduction -->
+            <div class="story-section">
+                <h2 class="section-title">Choose Your Journey</h2>
+                <div class="roles-grid">
+                    <!-- Student Role -->
+                    <div class="role-card student-card" data-role="student">
+                        <div class="role-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="role-title">Student</h3>
+                        <p class="role-description">
+                            Discover internships tailored to your skills. 
+                            Let AI match you with opportunities that align with your expertise and goals.
+                        </p>
+                        <ul class="role-features">
+                            <li>AI-Powered Recommendations</li>
+                            <li>Resume Auto-Fill with OCR</li>
+                            <li>Skill Visualization</li>
+                            <li>Application Tracking</li>
+                        </ul>
+                        <button class="role-button" data-role="student">
+                            <span>Start as Student</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Company Role -->
+                    <div class="role-card company-card" data-role="company">
+                        <div class="role-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            </svg>
+                        </div>
+                        <h3 class="role-title">Company</h3>
+                        <p class="role-description">
+                            Post internships and find the perfect candidates. 
+                            Manage applications and connect with talented students.
+                        </p>
+                        <ul class="role-features">
+                            <li>Post & Manage Internships</li>
+                            <li>View Applicant Profiles</li>
+                            <li>Smart Candidate Filtering</li>
+                            <li>Application Management</li>
+                        </ul>
+                        <button class="role-button" data-role="company">
+                            <span>Start as Company</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- School/Admin Role -->
+                    <div class="role-card admin-card" data-role="admin">
+                        <div class="role-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3v18h18"/>
+                                <path d="M18 17V9"/>
+                                <path d="M13 17V5"/>
+                                <path d="M8 17v-3"/>
+                            </svg>
+                        </div>
+                        <h3 class="role-title">School / Admin</h3>
+                        <p class="role-description">
+                            Monitor platform analytics and student performance. 
+                            Gain insights with comprehensive data visualizations.
+                        </p>
+                        <ul class="role-features">
+                            <li>Comprehensive Analytics</li>
+                            <li>Student Performance Tracking</li>
+                            <li>Internship Insights</li>
+                            <li>User Management</li>
+                        </ul>
+                        <button class="role-button" data-role="admin">
+                            <span>Start as Admin</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="landing-footer">
+                <p>&copy; 2025 SkillMatchAI. Powered by TF-IDF & Cosine Similarity.</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Auth Page (Login/Register) -->
+    <div id="auth-page" class="page">
+        <div class="auth-container">
+            <div class="auth-box">
+                <button class="back-button" id="back-to-landing">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back
+                </button>
+
+                <div class="auth-header">
+                    <h2 id="auth-title">Welcome Back</h2>
+                    <p id="auth-subtitle">Sign in to continue</p>
+                </div>
+
+                <div class="role-indicator">
+                    <span id="selected-role-display">Student</span>
+                </div>
+
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label for="login-email">Username or Email</label>
+                        <input type="text" id="login-email" required placeholder="username or email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="submit-button">
+                        <span>Sign In</span>
+                        <div class="loading-spinner"></div>
+                    </button>
+                    <p class="form-toggle">
+                        Don't have an account? 
+                        <a href="#" id="show-register">Create one</a>
+                    </p>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" required placeholder="Min 8 characters, 1 letter, 1 number">
+                    </div>
+
+                    <!-- Student-specific fields -->
+                    <div id="student-fields" class="role-specific-fields">
+                        <div class="form-group">
+                            <label for="register-branch">Branch</label>
+                            <select id="register-branch">
+                                <option value="">Select Branch</option>
+                                <option value="CSE">Computer Science & Engineering</option>
+                                <option value="ECE">Electronics & Communication</option>
+                                <option value="ME">Mechanical Engineering</option>
+                                <option value="CE">Civil Engineering</option>
+                                <option value="EE">Electrical Engineering</option>
+                                <option value="IT">Information Technology</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="register-semester">Semester</label>
+                                <input type="number" id="register-semester" min="1" max="8" placeholder="6">
+                            </div>
+                            <div class="form-group">
+                                <label for="register-cgpa">CGPA</label>
+                                <input type="number" id="register-cgpa" min="0" max="10" step="0.01" placeholder="8.5">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-skills">Skills (comma-separated)</label>
+                            <input type="text" id="register-skills" placeholder="Python, Machine Learning, FastAPI">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-projects">Projects (comma-separated)</label>
+                            <textarea id="register-projects" rows="3" placeholder="E-commerce API, ML Classification Model"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="file-upload-label">
+                                <input type="file" id="resume-upload" accept=".pdf,.doc,.docx" class="file-input">
+                                <span class="file-upload-button">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                                    </svg>
+                                    Upload Resume (Auto-fill with OCR)
+                                </span>
+                            </label>
+                            <span id="resume-filename" class="file-name"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <span>Create Account</span>
+                        <div class="loading-spinner"></div>
+                    </button>
+                    <p class="form-toggle">
+                        Already have an account? 
+                        <a href="#" id="show-login">Sign in</a>
+                    </p>
+                </form>
+
+                <!-- Multi-Step Wizard Form (for Students) -->
+                <div id="wizard-form" class="wizard-container" style="display: none;">
+                    <!-- Progress Steps -->
+                    <div class="wizard-steps">
+                        <div class="wizard-step active">
+                            <div class="wizard-step-circle">1</div>
+                            <div class="wizard-step-label">Basic Info</div>
+                        </div>
+                        <div class="wizard-step">
+                            <div class="wizard-step-circle">2</div>
+                            <div class="wizard-step-label">Academic</div>
+                        </div>
+                        <div class="wizard-step">
+                            <div class="wizard-step-circle">3</div>
+                            <div class="wizard-step-label">Skills</div>
+                        </div>
+                        <div class="wizard-step">
+                            <div class="wizard-step-circle">4</div>
+                            <div class="wizard-step-label">Experience</div>
+                        </div>
+                        <div class="wizard-step">
+                            <div class="wizard-step-circle">5</div>
+                            <div class="wizard-step-label">Final</div>
+                        </div>
+                    </div>
+
+                    <!-- Wizard Content -->
+                    <div class="wizard-content">
+                        <!-- Step 1: Basic Info -->
+                        <div id="wizard-step-1" class="wizard-panel active">
+                            <h3 class="wizard-title">Basic Information</h3>
+                            <p class="wizard-description">Let's start with your basic details</p>
+                            
+                            <div class="wizard-field-group">
+                                <label>Full Name <span class="required">*</span></label>
+                                <input type="text" id="wizard-name" required placeholder="John Doe">
+                            </div>
+                            
+                            <div class="wizard-field-group">
+                                <label>Email Address <span class="required">*</span></label>
+                                <input type="email" id="wizard-email" required placeholder="your@email.com">
+                                <div class="wizard-helper-text">You'll receive your unique username after registration</div>
+                            </div>
+                            
+                            <div class="wizard-field-group">
+                                <label>Password <span class="required">*</span></label>
+                                <input type="password" id="wizard-password" required placeholder="Min 8 chars, 1 letter, 1 number">
+                                <div class="wizard-helper-text">Must be at least 8 characters with 1 letter and 1 number</div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Academic Info -->
+                        <div id="wizard-step-2" class="wizard-panel">
+                            <h3 class="wizard-title">Academic Information</h3>
+                            <p class="wizard-description">Tell us about your academic background</p>
+                            
+                            <div class="wizard-field-group">
+                                <label>Branch <span class="required">*</span></label>
+                                <select id="wizard-branch" required>
+                                    <option value="">Select Your Branch</option>
+                                    <option value="CSE">Computer Science & Engineering</option>
+                                    <option value="ECE">Electronics & Communication</option>
+                                    <option value="ME">Mechanical Engineering</option>
+                                    <option value="CE">Civil Engineering</option>
+                                    <option value="EE">Electrical Engineering</option>
+                                    <option value="IT">Information Technology</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="wizard-field-row">
+                                <div class="wizard-field-group">
+                                    <label>Current Semester <span class="required">*</span></label>
+                                    <input type="number" id="wizard-semester" required min="1" max="8" placeholder="6">
+                                </div>
+                                <div class="wizard-field-group">
+                                    <label>CGPA <span class="required">*</span></label>
+                                    <input type="number" id="wizard-cgpa" required min="0" max="10" step="0.01" placeholder="8.5">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Skills & Certifications -->
+                        <div id="wizard-step-3" class="wizard-panel">
+                            <h3 class="wizard-title">Skills & Certifications</h3>
+                            <p class="wizard-description">Share your technical skills and certifications</p>
+                            
+                            <div class="wizard-field-group">
+                                <label>Skills <span class="required">*</span></label>
+                                <div class="tags-input-container" id="wizard-skills-container">
+                                    <input type="text" id="wizard-skills-input" class="tag-input" placeholder="Type skill and press Enter">
+                                </div>
+                                <div class="wizard-helper-text">Press Enter or comma to add each skill</div>
+                            </div>
+                            
+                            <div class="wizard-field-group">
+                                <label>Certifications</label>
+                                <div class="tags-input-container" id="wizard-certifications-container">
+                                    <input type="text" id="wizard-certifications-input" class="tag-input" placeholder="Type certification and press Enter">
+                                </div>
+                                <div class="wizard-helper-text">E.g., AWS Certified, Google Cloud, Coursera certificates</div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Experience & Projects -->
+                        <div id="wizard-step-4" class="wizard-panel">
+                            <h3 class="wizard-title">Experience & Projects</h3>
+                            <p class="wizard-description">Highlight your work experience and projects</p>
+                            
+                            <div class="wizard-field-group">
+                                <label>Work Experience</label>
+                                <textarea id="wizard-experience" rows="4" placeholder="Describe your internships, part-time jobs, or work experience..."></textarea>
+                                <div class="wizard-helper-text">Include company names, roles, and duration</div>
+                            </div>
+                            
+                            <div class="wizard-field-group">
+                                <label>Projects</label>
+                                <div class="tags-input-container" id="wizard-projects-container">
+                                    <input type="text" id="wizard-projects-input" class="tag-input" placeholder="Type project name and press Enter">
+                                </div>
+                                <div class="wizard-helper-text">List your major academic or personal projects</div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Languages & Resume -->
+                        <div id="wizard-step-5" class="wizard-panel">
+                            <h3 class="wizard-title">Languages & Resume</h3>
+                            <p class="wizard-description">Final step - languages and resume upload</p>
+                            
+                            <div class="wizard-field-group">
+                                <label>Languages Known <span class="required">*</span></label>
+                                <div class="tags-input-container" id="wizard-languages-container">
+                                    <input type="text" id="wizard-languages-input" class="tag-input" placeholder="Type language and press Enter">
+                                </div>
+                                <div class="wizard-helper-text">E.g., English, Hindi, Tamil, etc.</div>
+                            </div>
+                            
+                            <div class="wizard-field-group">
+                                <label>Upload Resume (Optional)</label>
+                                <label for="wizard-resume-upload" class="wizard-file-upload">
+                                    <input type="file" id="wizard-resume-upload" class="wizard-file-input" accept=".pdf,.doc,.docx">
+                                    <div class="wizard-file-icon">📄</div>
+                                    <div class="wizard-file-text">Click to upload or drag and drop</div>
+                                    <div class="wizard-file-text">PDF, DOC, DOCX (Max 5MB)</div>
+                                    <div class="wizard-file-name" id="wizard-resume-name"></div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div class="wizard-navigation">
+                            <button type="button" id="wizard-prev" class="wizard-nav-btn btn-previous" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                                Previous
+                            </button>
+                            <button type="button" id="wizard-next" class="wizard-nav-btn btn-next">
+                                Next
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                            <button type="button" id="wizard-submit" class="wizard-nav-btn btn-submit" style="display: none;">
+                                <span>Create Account</span>
+                                <div class="loading-spinner"></div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p class="form-toggle" style="text-align: center; margin-top: 1rem;">
+                        Already have an account? 
+                        <a href="#" class="show-login-link">Sign in</a>
+                    </p>
+                </div>
+
+                <div id="auth-error" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div id="student-dashboard" class="page dashboard">
+        <!-- Dashboard content will be loaded dynamically -->
+    </div>
+
+    <!-- Company Dashboard -->
+    <div id="company-dashboard" class="page dashboard">
+        <!-- Dashboard content will be loaded dynamically -->
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="page dashboard">
+        <!-- Dashboard content will be loaded dynamically -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/ocr.js"></script>
+    <script src="js/wizard.js"></script>
+    <script src="js/dashboard-student.js"></script>
+    <script src="js/dashboard-company.js"></script>
+    <script src="js/dashboard-admin.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

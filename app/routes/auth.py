@@ -41,23 +41,23 @@ async def register(user_data: UserCreate):
 @router.post("/login", response_model=Token)
 async def login(credentials: UserLogin):
     """
-    Login with email and password
+    Login with username/email and password
     
-    - **email**: User's email address
+    - **username_or_email**: User's username or email address
     - **password**: User's password
     """
     user_service = UserService()
     
     # Authenticate user
     user = await user_service.authenticate_user(
-        credentials.email,
+        credentials.username_or_email,
         credentials.password
     )
     
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect email or password",
+            detail="Incorrect username/email or password",
             headers={"WWW-Authenticate": "Bearer"}
         )
     

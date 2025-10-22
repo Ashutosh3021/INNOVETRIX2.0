@@ -1,0 +1,331 @@
+/* ============================================
+   MULTI-STEP WIZARD FORM STYLES
+   ============================================ */
+
+.wizard-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Progress Steps */
+.wizard-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.wizard-steps::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--border-color);
+    z-index: 0;
+}
+
+.wizard-step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    flex: 1;
+}
+
+.wizard-step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.5rem;
+    font-weight: 700;
+    transition: all var(--transition-base);
+}
+
+.wizard-step.active .wizard-step-circle {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--bg-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+.wizard-step.completed .wizard-step-circle {
+    background: var(--success);
+    border-color: var(--success);
+    color: var(--bg-primary);
+}
+
+.wizard-step.completed .wizard-step-circle::before {
+    content: '✓';
+}
+
+.wizard-step-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.wizard-step.active .wizard-step-label {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Wizard Content */
+.wizard-content {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    min-height: 400px;
+}
+
+.wizard-panel {
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.wizard-panel.active {
+    display: block;
+}
+
+.wizard-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.wizard-description {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Wizard Navigation */
+.wizard-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.wizard-nav-btn {
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-md);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.wizard-nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-previous {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-previous:hover:not(:disabled) {
+    border-color: var(--primary);
+}
+
+.btn-next,
+.btn-submit {
+    background: var(--primary);
+    color: var(--bg-primary);
+}
+
+.btn-next:hover:not(:disabled),
+.btn-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Field Groups */
+.wizard-field-group {
+    margin-bottom: 1.5rem;
+}
+
+.wizard-field-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.wizard-field-group input,
+.wizard-field-group select,
+.wizard-field-group textarea {
+    width: 100%;
+    padding: 0.875rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all var(--transition-base);
+}
+
+.wizard-field-group input:focus,
+.wizard-field-group select:focus,
+.wizard-field-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(189, 147, 249, 0.1);
+}
+
+.wizard-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Tags Input */
+.tags-input-container {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.5rem;
+    min-height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: flex-start;
+}
+
+.tags-input-container:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(189, 147, 249, 0.1);
+}
+
+.tag-item {
+    background: var(--primary);
+    color: var(--bg-primary);
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tag-remove {
+    background: none;
+    border: none;
+    color: var(--bg-primary);
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0;
+    line-height: 1;
+}
+
+.tag-input {
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 150px;
+    padding: 0.375rem;
+    outline: none;
+}
+
+/* File Upload in Wizard */
+.wizard-file-upload {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    text-align: center;
+    background: var(--bg-tertiary);
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.wizard-file-upload:hover {
+    border-color: var(--primary);
+    background: rgba(189, 147, 249, 0.05);
+}
+
+.wizard-file-upload.has-file {
+    border-color: var(--success);
+    background: rgba(80, 250, 123, 0.05);
+}
+
+.wizard-file-input {
+    display: none;
+}
+
+.wizard-file-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.wizard-file-text {
+    color: var(--text-secondary);
+}
+
+.wizard-file-name {
+    color: var(--success);
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+/* Helper Text */
+.wizard-helper-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+.wizard-error-text {
+    font-size: 0.875rem;
+    color: var(--error);
+    margin-top: 0.25rem;
+}
+
+/* Required Indicator */
+.required {
+    color: var(--error);
+    margin-left: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .wizard-container {
+        padding: 1rem;
+    }
+    
+    .wizard-content {
+        padding: 1.5rem;
+    }
+    
+    .wizard-field-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .wizard-steps {
+        margin-bottom: 2rem;
+    }
+    
+    .wizard-step-label {
+        font-size: 0.75rem;
+    }
+    
+    .wizard-step-circle {
+        width: 35px;
+        height: 35px;
+        font-size: 0.875rem;
+    }
+}

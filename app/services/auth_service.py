@@ -3,16 +3,13 @@ Authentication service for JWT token and password handling
 """
 from datetime import datetime, timedelta
 from typing import Optional
-from passlib.context import CryptContext
+import bcrypt
 import jwt
 from jwt.exceptions import PyJWTError
 from fastapi import HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from app.config import settings
 from app.models.user import TokenData
-
-# Password hashing context
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # HTTP Bearer token security
 security = HTTPBearer()
@@ -23,13 +20,43 @@ class AuthService:
     
     @staticmethod
     def hash_password(password: str) -> str:
-        """Hash a plain text password"""
-        return pwd_context.hash(password)
+        """
+        Hash a plain text password using bcrypt directly
+        
+        Note: bcrypt has a 72-byte limit. Passwords are validated
+        before reaching this point, but we add safety check here.
+        """
+        # Safety check: bcrypt has 72-byte limit
+        password_bytes = password.encode('utf-8')
+        if len(password_bytes) > 72:
+            # This should be caught by validation, but add safety
+            raise ValueError('Password exceeds bcrypt 72-byte limit')
+        
+        # Generate salt and hash password
+        salt = bcrypt.gensalt()
+        hashed = bcrypt.hashpw(password_bytes, salt)
+        
+        # Return as string for storage
+        return hashed.decode('utf-8')
     
     @staticmethod
     def verify_password(plain_password: str, hashed_password: str) -> bool:
-        """Verify a password against its hash"""
-        return pwd_context.verify(plain_password, hashed_password)
+        """
+        Verify a password against its hash using bcrypt directly
+        
+        Args:
+            plain_password: The plain text password to verify
+            hashed_password: The bcrypt hash to verify against
+            
+        Returns:
+            True if password matches, False otherwise
+        """
+        try:
+            password_bytes = plain_password.encode('utf-8')
+            hashed_bytes = hashed_password.encode('utf-8')
+            return bcrypt.checkpw(password_bytes, hashed_bytes)
+        except Exception:
+            return False
     
     @staticmethod
     def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:

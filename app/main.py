@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from app.config import settings
 from app.database.db import connect_to_mongo, close_mongo_connection
-from app.routes import auth, users, internships, matching
+from app.routes import auth, users, internships, matching, applications, admin
 
 
 @asynccontextmanager
@@ -59,11 +59,11 @@ app = FastAPI(
     redoc_url="/redoc",  # ReDoc UI
 )
 
-# Configure CORS - use the property that converts string to list
+# Configure CORS - Allow all origins for development (including file:// protocol)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,  # Use the property method
-    allow_credentials=True,
+    allow_origins=["*"],  # Allow all origins (development mode)
+    allow_credentials=False,  # Must be False when using allow_origins=["*"]
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -73,6 +73,8 @@ app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(internships.router)
 app.include_router(matching.router)
+app.include_router(applications.router)
+app.include_router(admin.router)
 
 
 @app.get("/", tags=["Root"])
